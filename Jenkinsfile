@@ -19,11 +19,7 @@ node {
 
         buildInfo = Artifactory.newBuildInfo()
     }
- 
-    // stage ('Test') {
-    //     rtMaven.run pom: 'pom.xml', goals: 'clean test'
-    // }
-        
+     
     stage ('Package') {
         rtMaven.run pom: 'pom.xml', goals: 'clean install', buildInfo: buildInfo
     }
@@ -43,7 +39,6 @@ node {
             'failBuild'      : true
         ]
 
-        def scanResult = server.xrayScan scanConfig
-        echo scanResult as String
+        server.xrayScan scanConfig
     }
 }
