@@ -25,7 +25,7 @@ node {
     // }
         
     stage ('Package') {
-        rtMaven.run pom: 'pom.xml', goals: 'package', buildInfo: buildInfo
+        rtMaven.run pom: 'pom.xml', goals: 'clean install', buildInfo: buildInfo
     }
 
     stage ('Deploy') {
