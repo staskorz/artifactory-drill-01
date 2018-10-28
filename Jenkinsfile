@@ -39,9 +39,11 @@ node {
     stage ('Scan') {
         def scanConfig = [
             'buildName'      : buildInfo.name,
-            'buildNumber'    : buildInfo.number
+            'buildNumber'    : buildInfo.number,
+            'failBuild'      : false
         ]
 
-        server.xrayScan scanConfig
+        def scanResult = server.xrayScan scanConfig
+        echo scanResult
     }
 }
