@@ -18,6 +18,12 @@ node {
         rtMaven.deployer.deployArtifacts = false // Disable artifacts deployment during Maven run
 
         buildInfo = Artifactory.newBuildInfo()
+
+        server.publishBuildInfo buildInfo
+        def scanConfig = [
+            'buildName'      : buildInfo.name,
+            'buildNumber'    : buildInfo.number
+        ]
     }
  
     // stage ('Test') {
@@ -26,6 +32,10 @@ node {
         
     stage ('Package') {
         rtMaven.run pom: 'pom.xml', goals: 'package', buildInfo: buildInfo
+    }
+
+    stage ('Scan') {
+        server.xrayScan scanConfig
     }
  
     stage ('Deploy') {
