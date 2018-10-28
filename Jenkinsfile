@@ -28,6 +28,14 @@ node {
         rtMaven.run pom: 'pom.xml', goals: 'package', buildInfo: buildInfo
     }
 
+    stage ('Deploy') {
+        rtMaven.deployer.deployArtifacts buildInfo
+    }
+        
+    stage ('Publish build info') {
+        server.publishBuildInfo buildInfo
+    }
+
     stage ('Scan') {
         server.publishBuildInfo buildInfo
         def scanConfig = [
@@ -36,13 +44,5 @@ node {
         ]
 
         server.xrayScan scanConfig
-    }
- 
-    stage ('Deploy') {
-        rtMaven.deployer.deployArtifacts buildInfo
-    }
-        
-    stage ('Publish build info') {
-        server.publishBuildInfo buildInfo
     }
 }
