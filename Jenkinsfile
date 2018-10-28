@@ -44,6 +44,6 @@ node {
         ]
 
         def scanResult = server.xrayScan scanConfig
-        echo scanResult
+        echo scanResult as String
     }
 }
