@@ -37,7 +37,6 @@ node {
     }
 
     stage ('Scan') {
-        server.publishBuildInfo buildInfo
         def scanConfig = [
             'buildName'      : buildInfo.name,
             'buildNumber'    : buildInfo.number
