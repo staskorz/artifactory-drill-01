@@ -12,7 +12,7 @@ node {
         server = Artifactory.server 'local-artifactory-01'
 
         rtMaven = Artifactory.newMavenBuild()
-        rtMaven.tool = '/usr/local/Cellar/maven/3.5.4' // Tool name from Jenkins configuration
+        rtMaven.tool = 'maven' // Tool name from Jenkins configuration
         rtMaven.deployer releaseRepo: 'libs-release-local', snapshotRepo: 'libs-snapshot-local', server: server
         rtMaven.resolver releaseRepo: 'libs-release', snapshotRepo: 'libs-snapshot', server: server
         rtMaven.deployer.deployArtifacts = false // Disable artifacts deployment during Maven run
